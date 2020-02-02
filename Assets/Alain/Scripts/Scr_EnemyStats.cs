@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Scr_PlayerStats : MonoBehaviour
+public class Scr_EnemyStats : MonoBehaviour
 {
     [SerializeField]
     private int hp;
@@ -13,19 +13,6 @@ public class Scr_PlayerStats : MonoBehaviour
 
     [SerializeField]
     private int atk;
-
-    [SerializeField]
-    private int gold;
-
-    public int getGold()
-    {
-        return gold;
-    }
-
-    public void SetGold(int _gold)
-    {
-        gold = _gold;
-    }
 
     public int GetAtack()
     {
