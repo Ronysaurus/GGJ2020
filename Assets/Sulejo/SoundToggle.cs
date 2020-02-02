@@ -38,7 +38,7 @@ public static bool disabled2 = true;
 		}
 	}
 
-public void ChangeScreen()
+	public void ChangeScreen()
 	{
 	if(disabled2){			
 		ObjectToDisable3.SetActive(false);

@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
+	public GameObject Player;
+	public float TargetDistance;
+	public float AllowedDistance = 5;
+	public GameObject Enemy;
+	public float FollowSpeed;
+	public RayCastHit Shot;
 
-	public Transform ObjectToFollow = null;
-	public float Speed =2;
-
-    // Start is called before the first frame update
-
-    void Start()
-    {
-        ObjectToFollow = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(ObjectToFollow == null)
-	return;
-
-	transform.position = Vector2.MoveTowards(transform.position, ObjectToFollow.transform.position, Speed *Time.deltaTime);
-	transform.up = ObjectToFollow.position - transform.position ;
+        transform.LookAt(Player.transform);
+		if(Physics.Raycast(transform.position,transform.TransformDirection(Vector3.forward),out Shot))
+		{
+			TargetDistance = Shot.distance;
+			if(TargetDistance >= AllowedDistance)
+			{
+				FollowSpeed = 0.5f;
+				NPC.GetComponent<Animation>().Play("Running");
+				transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, FollowSpeed);
+			}
+			else
+			{
+				FollowSpeed = 0;
+				NPC.GetComponent<Animation>().Play("Idle");
+			}
+		}
     }
 }
