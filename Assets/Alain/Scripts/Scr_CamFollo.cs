@@ -5,7 +5,7 @@ public class Scr_CamFollo : MonoBehaviour
     private Transform playerTrans;
 
     [SerializeField]
-    private readonly int distance = 2;
+    private readonly int distance = 3;
 
     private void Start()
     {

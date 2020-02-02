@@ -15,6 +15,7 @@ public class Enemigo : MonoBehaviour
     private Transform targetTrans;
     private float attackCD;
     private bool targetIsPlayer;
+    public int spawnIndex;
 
     private void Start()
     {
@@ -42,10 +43,10 @@ public class Enemigo : MonoBehaviour
         {
             if (targetIsPlayer)
             {
-                anim.SetBool("Idle", false);
+                anim.SetBool("Idle", true);
                 Atack();
             }
-            else if (CP_ID < allCP.Length - 1)
+            else if (CP_ID - (spawnIndex * 5) < (allCP.Length / 2) - 1)
             {
                 GetNextCheckP();
             }
@@ -53,7 +54,7 @@ public class Enemigo : MonoBehaviour
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetTrans.position.x, transform.position.y, targetTrans.position.z), stats.GetSpeed());
-            anim.SetBool("Idle", true);
+            anim.SetBool("Idle", false);
         }
     }
 
@@ -92,7 +93,7 @@ public class Enemigo : MonoBehaviour
     {
         foreach (var CP in allCP)
         {
-            if (CP.index == CP_ID)
+            if (CP.index == CP_ID + (spawnIndex * 5))
             {
                 currentCP = CP.GetComponent<Transform>();
                 CP_ID++;

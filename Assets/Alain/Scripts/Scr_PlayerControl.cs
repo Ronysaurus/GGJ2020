@@ -70,6 +70,9 @@ public class Scr_PlayerControl : MonoBehaviour
 
     public void GetHit(int dmg)
     {
+        if (deadeded)
+            return;
+
         stats.SetHp(stats.GetHP() - dmg);
         if (stats.GetHP() <= 0)
             Death();
