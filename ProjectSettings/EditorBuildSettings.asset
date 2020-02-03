@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Alain/Scenes/Main.unity
+    guid: 5d8ebd1786401244c8670d921588ae71
+  - enabled: 1
+    path: Assets/Sulejo/Credits.unity
+    guid: 3e2fb1b6f831a504cbf76e242918d3bd
+  - enabled: 1
+    path: Assets/Sulejo/GameOver.unity
+    guid: fb198a71a729d0c4b939b6d6cce62da3
   m_configObjects: {}

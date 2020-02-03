@@ -1,18 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Scr_PlayerControl : MonoBehaviour
 {
+    public GameObject turret;
+
     private Animator anim;
     private float atackCD;
     private Scr_PlayerStats stats;
     private int running;
     private bool deadeded;
+    private bool canBuild;
 
     [SerializeField]
     private float camSpeed = 50;
 
     private void Start()
     {
+        canBuild = true;
         stats = this.GetComponent<Scr_PlayerStats>();
         atackCD = 1.2f;
         anim = this.GetComponentInChildren<Animator>();
@@ -39,6 +44,9 @@ public class Scr_PlayerControl : MonoBehaviour
         {
             anim.SetBool("Repair", false);
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+            Build();
+
         anim.SetFloat("Vertical", Input.GetAxis("Vertical") * running);
         anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
     }
@@ -64,8 +72,24 @@ public class Scr_PlayerControl : MonoBehaviour
             if (Vector3.Distance(transform.position, enemy.transform.position) <= 2)
             {
                 enemy.getHit(stats.GetAtack());
+                SoundManagerScript.PlaySound("SwordAttack");
             }
         }
+    }
+
+    private void Build()
+    {
+        //we're forknife here bois
+        if (stats.getGold() < 100 || !canBuild)
+            return;
+        Instantiate(turret, this.transform.position, Quaternion.identity);
+        stats.SetGold(stats.getGold() - 100);
+        SoundManagerScript.PlaySound("EregirTorreta");
+    }
+
+    public void GetMoney(int money)
+    {
+        stats.SetGold(stats.getGold() + money);
     }
 
     public void GetHit(int dmg)
@@ -79,7 +103,17 @@ public class Scr_PlayerControl : MonoBehaviour
     }
 
     private void Repair()
+
     {
+        foreach (var turret in FindObjectsOfType<Scr_turret>())
+        {
+            
+            if (Vector3.Distance(transform.position, turret.transform.position) <= 2 && stats.getGold() > 0)
+            {
+                stats.SetGold(stats.getGold() - Time.deltaTime);
+                turret.Repair(2 * Time.deltaTime);
+            }
+        }
     }
 
     private void Dance()
@@ -89,12 +123,29 @@ public class Scr_PlayerControl : MonoBehaviour
 
     private void Death()
     {
+        SoundManagerScript.PlaySound("Shot");
         deadeded = true;
         PerformAction("Die");
+        FindObjectOfType<GameManager>().GameOver();
     }
 
     private void PerformAction(string action)
     {
         anim.SetTrigger(action);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Terrain"))
+            canBuild = false;
+        if (other.CompareTag("Shrine"))
+            if (stats.GetHP() < stats.GetMaxHp())
+                stats.SetHp(stats.GetHP()+(1*Time.deltaTime));
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Terrain"))
+            canBuild = true;
     }
 }

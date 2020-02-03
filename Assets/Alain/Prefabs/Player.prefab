@@ -975,7 +975,6 @@ GameObject:
   - component: {fileID: 5278593958647875106}
   - component: {fileID: 5278593958647875107}
   - component: {fileID: 7111496470984711797}
-  - component: {fileID: 7111496470984711798}
   - component: {fileID: 7111496470984711792}
   - component: {fileID: 7111496470984711793}
   m_Layer: 0
@@ -1055,19 +1054,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!65 &7111496470984711798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4206564546347211621}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0.5}
 --- !u!114 &7111496470984711792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,6 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc76aa911a0ea846ac37abcd41dfd81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turret: {fileID: 10479848224989790, guid: 0212eda28752b3e4db56a73cd8fafed6, type: 3}
   camSpeed: 50
 --- !u!114 &7111496470984711793
 MonoBehaviour:
@@ -1094,10 +1081,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  speed: 2
+  speed: 3
   maxHp: 100
   atk: 10
-  gold: 0
+  gold: 1000
 --- !u!1 &4274021037480732220
 GameObject:
   m_ObjectHideFlags: 0

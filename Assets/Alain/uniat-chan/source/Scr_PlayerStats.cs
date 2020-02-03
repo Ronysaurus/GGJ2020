@@ -3,7 +3,7 @@
 public class Scr_PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private int hp;
+    private float hp;
 
     [SerializeField]
     private float speed;
@@ -15,14 +15,14 @@ public class Scr_PlayerStats : MonoBehaviour
     private int atk;
 
     [SerializeField]
-    private int gold;
+    private float gold;
 
-    public int getGold()
+    public float getGold()
     {
         return gold;
     }
 
-    public void SetGold(int _gold)
+    public void SetGold(float _gold)
     {
         gold = _gold;
     }
@@ -37,7 +37,7 @@ public class Scr_PlayerStats : MonoBehaviour
         atk = _atk;
     }
 
-    public int GetMaxHp()
+    public float GetMaxHp()
     {
         return maxHp;
     }
@@ -57,12 +57,12 @@ public class Scr_PlayerStats : MonoBehaviour
         speed = _speed;
     }
 
-    public int GetHP()
+    public float GetHP()
     {
         return hp;
     }
 
-    public void SetHp(int _hp)
+    public void SetHp(float _hp)
     {
         hp = _hp;
     }
